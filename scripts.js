@@ -50,6 +50,10 @@ document.getElementById('login-form').addEventListener('submit', function(event)
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
 
+    // Log the entered credentials
+    console.log('Entered Username:', username);
+    console.log('Entered Password:', password);
+
     // Validate login
     const user = users.find(user => user.username === username && user.password === password);
     if (user) {
