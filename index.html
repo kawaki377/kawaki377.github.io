@@ -13,6 +13,8 @@
             <ul>
                 <li><a href="#login-section">Login</a></li>
                 <li><a href="#reservation-section">Reservation</a></li>
+                <li><a href="#client-info-section" id="client-info-link" style="display: none;">Client Info</a></li>
+                <li><a href="#" id="logout-link" style="display: none;">Logout</a></li>
             </ul>
         </nav>
     </header>
@@ -38,6 +40,10 @@
         <section id="confirmation-section" style="display: none;">
             <h2>Reservation Confirmed</h2>
             <p>Your reservation is confirmed. You have <span id="time-left"></span> until your appointment.</p>
+        </section>
+        <section id="client-info-section" style="display: none;">
+            <h2>Client Information</h2>
+            <div id="client-info"></div>
         </section>
     </main>
     <footer>
