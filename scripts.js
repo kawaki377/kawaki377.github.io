@@ -9,6 +9,20 @@ function findReservation(username) {
     return reservations.find(reservation => reservation.username === username);
 }
 
+// Save login information to session storage
+function saveLoginInfo(username, phone) {
+    sessionStorage.setItem('username', username);
+    sessionStorage.setItem('phone', phone);
+}
+
+// Retrieve login information from session storage
+function getLoginInfo() {
+    return {
+        username: sessionStorage.getItem('username'),
+        phone: sessionStorage.getItem('phone')
+    };
+}
+
 // Login form submission handler
 document.getElementById('login-form').addEventListener('submit', function(event) {
     event.preventDefault();
@@ -17,6 +31,7 @@ document.getElementById('login-form').addEventListener('submit', function(event)
 
     // Simulate login validation (this should be replaced with real validation logic)
     if (username && password) {
+        saveLoginInfo(username, '');
         document.getElementById('login-section').style.display = 'none';
         document.getElementById('reservation-section').style.display = 'block';
     } else {
@@ -28,11 +43,14 @@ document.getElementById('login-form').addEventListener('submit', function(event)
 document.getElementById('reservation-form').addEventListener('submit', function(event) {
     event.preventDefault();
     const phone = document.getElementById('phone').value;
-    const username = document.getElementById('username').value;
+    const { username } = getLoginInfo();
 
     if (phone) {
         // Save the reservation (this should be replaced with real reservation logic)
         reservations.push({ username, phone, time: '30 minutes' });
+
+        // Save phone number to session storage
+        saveLoginInfo(username, phone);
 
         document.getElementById('reservation-section').style.display = 'none';
         document.getElementById('confirmation-section').style.display = 'block';
@@ -47,7 +65,7 @@ document.getElementById('reservation-form').addEventListener('submit', function(
 
 // Function to update the UI based on user interaction
 function updateUI() {
-    const username = document.getElementById('username').value;
+    const { username } = getLoginInfo();
     const reservation = findReservation(username);
 
     if (reservation) {
